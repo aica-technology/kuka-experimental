@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="kr16_2_ros2_control">
-  <xacro:macro name="kr16_2_interface" params="name prefix rsi_ip rsi_port">
+  <xacro:macro name="kr16_2_interface" params="name prefix rsi_ip rsi_port socket_timeout">
 
     <ros2_control name="${name}" type="system">
       <hardware>
         <plugin>robot_interface/kuka/RsiInterface</plugin>
         <param name="rsi_ip">${rsi_ip}</param>
         <param name="rsi_port">${rsi_port}</param>
+        <param name="socket_timeout">${socket_timeout}</param>
       </hardware>
 
       <joint name="${prefix}joint_a1">
