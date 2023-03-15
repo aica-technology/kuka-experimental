@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<package format="2">
+<package format="3">
   <name>kuka_rsi_simulator</name>
   <version>0.1.0</version>
   <description>Python node that implements a minimal RSI interface simulator.</description>
