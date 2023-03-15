@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="kr16_2_ros2_control">
+  <xacro:macro name="kr16_2_interface" params="name prefix rsi_ip rsi_port socket_timeout">
+
+    <ros2_control name="${name}" type="system">
+      <hardware>
+        <plugin>robot_interface/kuka/RsiInterface</plugin>
+        <param name="rsi_ip">${rsi_ip}</param>
+        <param name="rsi_port">${rsi_port}</param>
+        <param name="socket_timeout">${socket_timeout}</param>
+      </hardware>
+
+      <joint name="${prefix}joint_a1">
+        <command_interface name="position">
+          <param name="min">-3.22885911619</param>
+          <param name="max">3.22885911619</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-10</param>
+          <param name="max">10</param>
+        </command_interface>
+        <state_interface name="position"/>
+      </joint>
+      <joint name="${prefix}joint_a2">
+        <command_interface name="position">
+          <param name="min">-2.70526034059</param>
+          <param name="max">0.610865238198</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-10</param>
+          <param name="max">10</param>
+        </command_interface>
+        <state_interface name="position"/>
+      </joint>
+      <joint name="${prefix}joint_a3">
+        <command_interface name="position">
+          <param name="min">-2.26892802759</param>
+          <param name="max">2.26892802759</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-10</param>
+          <param name="max">10</param>
+        </command_interface>
+        <state_interface name="position"/>
+      </joint>
+      <joint name="${prefix}joint_a4">
+        <command_interface name="position">
+          <param name="min">-6.10865238198</param>
+          <param name="max">6.10865238198</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-10</param>
+          <param name="max">10</param>
+        </command_interface>
+        <state_interface name="position"/>
+      </joint>
+      <joint name="${prefix}joint_a5">
+        <command_interface name="position">
+          <param name="min">-2.26892802759</param>
+          <param name="max">2.26892802759</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-10</param>
+          <param name="max">10</param>
+        </command_interface>
+        <state_interface name="position"/>
+      </joint>
+      <joint name="${prefix}joint_a6">
+        <command_interface name="position">
+          <param name="min">-6.10865238198</param>
+          <param name="max">6.10865238198</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-10</param>
+          <param name="max">10</param>
+        </command_interface>
+        <state_interface name="position"/>
+      </joint>
+
+    </ros2_control>
+  </xacro:macro>
+</robot>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="kr16_2">
+  <xacro:arg name="prefix" default="kr16_2_"/>
+  <xacro:arg name="rsi_ip" default="127.0.0.1"/>
+  <xacro:arg name="rsi_port" default="49152"/>
+  <xacro:arg name="socket_timeout" default="30"/>
+  <xacro:arg name="load_ros2_control" default="false"/>
+  <xacro:arg name="connected_to" default=""/>
+  <xacro:arg name="xyz" default="0 0 0"/>
+  <xacro:arg name="rpy" default="0 0 0"/>
+
+  <xacro:include filename="$(find kuka_kr16_support)/robots/kr16_2.xacro"/>
+  <xacro:include filename="$(find kuka_kr16_support)/ros2_control/kr16_2.ros2_control.xacro"/>
+
+  <xacro:kr16_2 prefix="$(arg prefix)" connected_to="$(arg connected_to)" xyz="$(arg xyz)" rpy="$(arg rpy)"/>
+  <xacro:if value="$(arg load_ros2_control)">
+    <xacro:kr16_2_interface
+            name="RsiInterface"
+            prefix="$(arg prefix)"
+            rsi_ip="$(arg rsi_ip)"
+            rsi_port="$(arg rsi_port)"
+            rsi_timeout="$(arg socket_timeout)"
+    />
+  </xacro:if>
+</robot>

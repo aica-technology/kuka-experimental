@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://wiki.ros.org/xacro">
-
-  <xacro:macro name="kuka_kr16_2" params="prefix">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="kr16_2_macro">
+  <xacro:macro name="kr16_2" params="prefix:='kr16_2_' connected_to:='' xyz:='0 0 0' rpy:='0 0 0'">
     <!-- LINKS -->
     <!-- base link -->
     <link name="${prefix}base_link">
@@ -204,6 +203,19 @@
       <origin xyz="0.158 0 0" rpy="0 0 0"/>
     </joint>
     <!-- END JOINTS -->
+
+    <xacro:if value="${connected_to == ''}">
+      <link name="world"/>
+      <xacro:property name="base_frame_name" value="world"/>
+    </xacro:if>
+    <xacro:unless value="${connected_to == ''}">
+      <xacro:property name="base_frame_name" value="${connected_to}"/>
+    </xacro:unless>
+    <joint name="${base_frame_name}-${prefix}base_link" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+      <parent link="${base_frame_name}"/>
+      <child link="${prefix}base_link"/>
+    </joint>
 
     <!-- ROS base_link to KUKA $ROBROOT coordinate system transform -->
     <link name="${prefix}base" />

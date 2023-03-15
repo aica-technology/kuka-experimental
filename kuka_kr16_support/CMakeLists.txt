@@ -1,15 +1,25 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.15)
 
 project(kuka_kr16_support)
 
-find_package(catkin REQUIRED)
-
-catkin_package()
-
-if (CATKIN_ENABLE_TESTING)
-  find_package(roslaunch REQUIRED)
-  roslaunch_add_file_check(test/roslaunch_test.xml)
+# default to C99
+if(NOT CMAKE_C_STANDARD)
+  set(CMAKE_C_STANDARD 99)
 endif()
 
-install(DIRECTORY config launch meshes urdf
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+# default to C++17
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 17)
+endif()
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+find_package(ament_cmake REQUIRED)
+
+foreach(dir config launch meshes robots ros2_control urdf)
+  install(DIRECTORY ${dir}/ DESTINATION share/${PROJECT_NAME}/${dir})
+endforeach(dir)
+
+ament_package()
