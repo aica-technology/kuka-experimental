@@ -8,7 +8,7 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
     launch_argument = DeclareLaunchArgument(
-        "model", description="URDF/XACRO description file with the robot.", default_value="kr16_2"
+        "model", description="URDF/XACRO description file with the robot.", default_value="kr16"
     )
 
     robot_description_content = Command(
@@ -38,7 +38,7 @@ def generate_launch_description():
         package="rviz2",
         executable="rviz2",
         name="rviz2",
-        arguments=["-d", PathJoinSubstitution([FindPackageShare("kuka_kr16_support"), "config/kr16_2.rviz"])],
+        arguments=["-d", PathJoinSubstitution([FindPackageShare("kuka_kr16_support"), "config/kr16.rviz"])],
         output="log",
     )
 
