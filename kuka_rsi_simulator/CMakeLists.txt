@@ -1,13 +1,29 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.15)
+
 project(kuka_rsi_simulator)
 
-find_package(catkin REQUIRED)
+# default to C99
+if(NOT CMAKE_C_STANDARD)
+    set(CMAKE_C_STANDARD 99)
+endif()
 
-catkin_package()
+# default to C++17
+if(NOT CMAKE_CXX_STANDARD)
+    set(CMAKE_CXX_STANDARD 17)
+endif()
 
-install(
-  PROGRAMS scripts/kuka_rsi_simulator
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}/scripts)
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
-install(DIRECTORY launch
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+find_package(ament_cmake_auto REQUIRED)
+find_package(ament_cmake_python REQUIRED)
+
+ament_auto_find_build_dependencies()
+
+ament_python_install_package(${PROJECT_NAME} SCRIPTS_DESTINATION lib/${PROJECT_NAME})
+
+install(DIRECTORY launch/ DESTINATION share/${PROJECT_NAME}/launch)
+
+ament_auto_package()
+
