@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="kr16_ros2_control">
-  <xacro:macro name="kr16_interface" params="name prefix rsi_ip rsi_port socket_timeout">
+  <xacro:macro name="kr16_interface" params="name prefix rsi_ip rsi_port socket_timeout has_ft_sensor">
 
     <ros2_control name="${name}" type="system">
       <hardware>
@@ -76,6 +76,17 @@
         </command_interface>
         <state_interface name="position"/>
       </joint>
+
+      <xacro:if value="${has_ft_sensor}">
+        <sensor name="${prefix}ft_sensor">
+          <state_interface name="force.x"/>
+          <state_interface name="force.y"/>
+          <state_interface name="force.z"/>
+          <state_interface name="torque.x"/>
+          <state_interface name="torque.y"/>
+          <state_interface name="torque.z"/>
+        </sensor>
+      </xacro:if>
 
     </ros2_control>
   </xacro:macro>
