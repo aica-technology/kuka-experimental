@@ -16,7 +16,7 @@ class RsiSimulator(Node):
         self._host = host
         self._port = port
         self._q = np.array([0, -90, 90, 0, 90, 0]).astype(np.float64)
-        self._wrench = np.random.rand(6, 1)
+        self._wrench = np.random.rand(6,)
         self._timeout_count = 0
         self._ipoc = 0
         self._timer = self.create_timer(self._cycle_time, self.timer_callback)
@@ -60,7 +60,7 @@ class RsiSimulator(Node):
             recv_msg, addr = self._s.recvfrom(1024)
             des_joint_correction = self._parse_rsi_xml_sen(recv_msg)
             self._q += des_joint_correction
-            self._wrench = np.random.rand(6, 1)
+            self._wrench = np.random.rand(6,)
             self._ipoc += 1
             time.sleep(self._cycle_time / 2)
         except socket.timeout as e:
