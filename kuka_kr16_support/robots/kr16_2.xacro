@@ -205,12 +205,12 @@
     <!-- END JOINTS -->
 
     <xacro:if value="${connected_to == ''}">
-      <link name="world"/>
       <xacro:property name="base_frame_name" value="world"/>
     </xacro:if>
     <xacro:unless value="${connected_to == ''}">
       <xacro:property name="base_frame_name" value="${connected_to}"/>
     </xacro:unless>
+    <link name="${base_frame_name}"/>
     <joint name="${base_frame_name}-${prefix}base_link" type="fixed">
       <origin xyz="${xyz}" rpy="${rpy}"/>
       <parent link="${base_frame_name}"/>

@@ -19,7 +19,7 @@
             prefix="$(arg prefix)"
             rsi_ip="$(arg rsi_ip)"
             rsi_port="$(arg rsi_port)"
-            rsi_timeout="$(arg socket_timeout)"
+            socket_timeout="$(arg socket_timeout)"
     />
   </xacro:if>
 </robot>
