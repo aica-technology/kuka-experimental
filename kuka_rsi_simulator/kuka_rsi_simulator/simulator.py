@@ -16,6 +16,7 @@ class RsiSimulator(Node):
         self._host = host
         self._port = port
         self._q = np.array([0, -90, 90, 0, 90, 0]).astype(np.float64)
+        self._wrench = np.random.rand(6, 1)
         self._timeout_count = 0
         self._ipoc = 0
         self._timer = self.create_timer(self._cycle_time, self.timer_callback)
@@ -37,6 +38,8 @@ class RsiSimulator(Node):
                                      'A': '0.0', 'B': '0.0', 'C': '0.0'})
         ET.SubElement(root, 'AIPos', {'A1': str(self._q[0]), 'A2': str(self._q[1]), 'A3': str(self._q[2]),
                                       'A4': str(self._q[3]), 'A5': str(self._q[4]), 'A6': str(self._q[5])})
+        ET.SubElement(root, 'FT', {'Fx': str(self._wrench[0]), 'Fy': str(self._wrench[1]), 'Fz': str(self._wrench[2]),
+                                   'Tx': str(self._wrench[3]), 'Ty': str(self._wrench[4]), 'Tz': str(self._wrench[5])})
         ET.SubElement(root, 'Delay', {'D': str(self._timeout_count)})
         ET.SubElement(root, 'IPOC').text = str(self._ipoc)
         return ET.tostring(root)
@@ -57,6 +60,7 @@ class RsiSimulator(Node):
             recv_msg, addr = self._s.recvfrom(1024)
             des_joint_correction = self._parse_rsi_xml_sen(recv_msg)
             self._q += des_joint_correction
+            self._wrench = np.random.rand(6, 1)
             self._ipoc += 1
             time.sleep(self._cycle_time / 2)
         except socket.timeout as e:
