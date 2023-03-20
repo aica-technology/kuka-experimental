@@ -56,7 +56,7 @@ class RsiSimulator(Node):
             self._s.sendto(msg, (self._host, self._port))
             recv_msg, addr = self._s.recvfrom(1024)
             des_joint_correction = self._parse_rsi_xml_sen(recv_msg)
-            self._q += 50 * des_joint_correction * self._cycle_time
+            self._q += des_joint_correction
             self._ipoc += 1
             time.sleep(self._cycle_time / 2)
         except socket.timeout as e:
