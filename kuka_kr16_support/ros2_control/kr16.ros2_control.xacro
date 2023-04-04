@@ -20,6 +20,7 @@
           <param name="max">3.490658504</param>
         </command_interface>
         <state_interface name="position"/>
+        <state_interface name="velocity"/>
       </joint>
       <joint name="${prefix}joint_a2">
         <command_interface name="position">
@@ -31,6 +32,7 @@
           <param name="max">3.054326191</param>
         </command_interface>
         <state_interface name="position"/>
+        <state_interface name="velocity"/>
       </joint>
       <joint name="${prefix}joint_a3">
         <command_interface name="position">
@@ -42,6 +44,7 @@
           <param name="max">3.316125579</param>
         </command_interface>
         <state_interface name="position"/>
+        <state_interface name="velocity"/>
       </joint>
       <joint name="${prefix}joint_a4">
         <command_interface name="position">
@@ -53,6 +56,7 @@
           <param name="max">7.504915784</param>
         </command_interface>
         <state_interface name="position"/>
+        <state_interface name="velocity"/>
       </joint>
       <joint name="${prefix}joint_a5">
         <command_interface name="position">
@@ -64,6 +68,7 @@
           <param name="max">7.504915784</param>
         </command_interface>
         <state_interface name="position"/>
+        <state_interface name="velocity"/>
       </joint>
       <joint name="${prefix}joint_a6">
         <command_interface name="position">
@@ -75,6 +80,7 @@
           <param name="max">10.99557429</param>
         </command_interface>
         <state_interface name="position"/>
+        <state_interface name="velocity"/>
       </joint>
 
       <xacro:if value="${has_ft_sensor}">
