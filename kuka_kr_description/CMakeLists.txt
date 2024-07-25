@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 
-project(kuka_kr16_support)
+project(kuka_kr_description)
 
 # default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -18,7 +18,7 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 
-foreach(dir config launch meshes robots ros2_control urdf)
+foreach(dir meshes robots ros2_control)
   install(DIRECTORY ${dir}/ DESTINATION share/${PROJECT_NAME}/${dir})
 endforeach(dir)
 
