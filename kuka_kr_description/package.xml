@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>kuka_kr16_support</name>
+  <name>kuka_kr_description</name>
   <version>0.0.1</version>
-  <description>KUKA KR16 description package</description>
+  <description>KUKA KR series description package</description>
   <maintainer email="dominic@aica.tech">Dominic Reber</maintainer>
   <license>TODO</license>
 
