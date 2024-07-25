@@ -10,11 +10,11 @@
   <xacro:arg name="xyz" default="0 0 0"/>
   <xacro:arg name="rpy" default="0 0 0"/>
 
-  <xacro:include filename="$(find kuka_kr70_support)/robots/kr70.xacro"/>
+  <xacro:include filename="$(find kuka_kr_description)/robots/kr70.xacro"/>
 
   <xacro:kr16 prefix="$(arg prefix)" connected_to="$(arg connected_to)" xyz="$(arg xyz)" rpy="$(arg rpy)"/>
   <xacro:if value="$(arg load_ros2_control)">
-    <xacro:include filename="$(find kuka_kr70_support)/ros2_control/kr70.ros2_control.xacro"/>
+    <xacro:include filename="$(find kuka_kr_description)/ros2_control/kr70.ros2_control.xacro"/>
     <xacro:kr16_interface
             name="RsiInterface"
             prefix="$(arg prefix)"
