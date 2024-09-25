@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="kr210_r2700_ros2_control">
+  <xacro:macro name="kr210_r2700_interface" params="name prefix rsi_ip rsi_port socket_timeout has_ft_sensor">
+
+    <ros2_control name="${name}" type="system">
+      <hardware>
+        <plugin>robot_interface/kuka/RsiInterface</plugin>
+        <param name="rsi_ip">${rsi_ip}</param>
+        <param name="rsi_port">${rsi_port}</param>
+        <param name="socket_timeout">${socket_timeout}</param>
+      </hardware>
+
+      <joint name="${prefix}joint_a1">
+        <command_interface name="position">
+          <param name="min">${radians(-185)}</param>
+          <param name="max">${radians(185)}</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">${radians(-123)}</param>
+          <param name="max">${radians(123)}</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="${prefix}joint_a2">
+        <command_interface name="position">
+          <param name="min">${radians(-140)}</param>
+          <param name="max">${radians(-5)}</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">${radians(-115)}</param>
+          <param name="max">${radians(115)}</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="${prefix}joint_a3">
+        <command_interface name="position">
+          <param name="min">0</param>
+          <param name="max">${radians(138)}</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">${radians(-112)}</param>
+          <param name="max">${radians(112)}</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="${prefix}joint_a4">
+        <command_interface name="position">
+          <param name="min">${radians(-125)}</param>
+          <param name="max">${radians(125)}</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">${radians(-172)}</param>
+          <param name="max">${radians(172)}</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="${prefix}joint_a5">
+        <command_interface name="position">
+          <param name="min">${radians(-125)}</param>
+          <param name="max">${radians(125)}</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">${radians(-172)}</param>
+          <param name="max">${radians(172)}</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="${prefix}joint_a6">
+        <command_interface name="position">
+          <param name="min">${radians(-350)}</param>
+          <param name="max">${radians(350)}</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">${radians(-219)}</param>
+          <param name="max">${radians(219)}</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+
+      <xacro:if value="${has_ft_sensor}">
+        <sensor name="${prefix}ft_sensor">
+          <state_interface name="force.x"/>
+          <state_interface name="force.y"/>
+          <state_interface name="force.z"/>
+          <state_interface name="torque.x"/>
+          <state_interface name="torque.y"/>
+          <state_interface name="torque.z"/>
+        </sensor>
+      </xacro:if>
+
+    </ros2_control>
+  </xacro:macro>
+</robot>
