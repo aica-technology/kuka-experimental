@@ -1,0 +1,16 @@
+#syntax=ghcr.io/aica-technology/package-builder:v1.3.0
+
+[signing]
+signer = "v2.0.2"
+enabled = false
+
+[metadata]
+version = "0.0.0"
+description = "Kuka RSI Sim"
+
+[build]
+type = "ros"
+image = "v2.0.0-jazzy"
+
+[build.packages.sim]
+name = "kuka_rsi_simulator"
