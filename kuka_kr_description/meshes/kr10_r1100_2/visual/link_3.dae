@@ -5,8 +5,8 @@
     <contributor>
       <authoring_tool>ONSHAPE BY PTC INC, 1.195</authoring_tool>
     </contributor>
-    <created>2025-03-20T18:05:02</created>
-    <modified>2025-03-20T18:05:02</modified>
+    <created>2025-03-20T18:37:15</created>
+    <modified>2025-03-20T18:37:15</modified>
     <unit meter="1" name="meters"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -113,7 +113,7 @@
     <visual_scene id="ID1">
       <node id="ID2" name="link_3">
         <node>
-          <matrix>1 0 0 -0.025 0 1 0 0.0045 0 0 1 -0.96 0 0 0 1</matrix>
+          <matrix>1 0 0 -0.025 0 1 0 0 0 0 1 -0.96 0 0 0 1</matrix>
           <instance_node url="#ID3"/>
         </node>
       </node>
