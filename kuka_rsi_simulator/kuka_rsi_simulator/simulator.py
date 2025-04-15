@@ -25,7 +25,7 @@ class RsiSimulator(Node):
         try:
             self._s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             self.get_logger().info("Successfully created socket")
-            self._s.settimeout(1)
+            self._s.settimeout(0.004)
         except socket.error as e:
             self.get_logger().fatal(f"Could not create socket: {e}")
             sys.exit()
@@ -42,6 +42,7 @@ class RsiSimulator(Node):
         ET.SubElement(root, 'FT', {'Fx': str(self._wrench[0]), 'Fy': str(self._wrench[1]), 'Fz': str(self._wrench[2]),
                                    'Tx': str(self._wrench[3]), 'Ty': str(self._wrench[4]), 'Tz': str(self._wrench[5])})
         ET.SubElement(root, 'Delay', {'D': str(self._timeout_count)})
+        ET.SubElement(root, 'SENSOR').text = "4.0"
         ET.SubElement(root, 'IPOC').text = str(self._ipoc)
         return ET.tostring(root)
 
@@ -58,14 +59,15 @@ class RsiSimulator(Node):
         try:
             msg = self._create_rsi_xml_rob()
             self._s.sendto(msg, (self._host, self._port))
-            recv_msg, addr = self._s.recvfrom(1024)
+            recv_msg, _ = self._s.recvfrom(1024)
             self._dq = self._parse_rsi_xml_sen(recv_msg)
             self._q += self._dq
             self._wrench = np.random.rand(6,)
             self._ipoc += 1
+            self._timeout_count = 0
             time.sleep(self._cycle_time / 2)
         except socket.timeout as e:
-            self.get_logger().warn("Socket timed out")
+            self.get_logger().warn("Socket timed out", throttle_duration_sec=1.0)
             self._timeout_count += 1
         except socket.error as e:
             if e.errno != errno.EINTR:
