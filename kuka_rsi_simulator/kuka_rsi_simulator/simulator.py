@@ -15,18 +15,18 @@ class RsiSimulator(Node):
         self._cycle_time = 0.004
         self._host = host
         self._port = port
-        self._q = np.array([0, -90, 90, 0, 90, 0]).astype(np.float64)
-        self._dq = np.array([0, 0, 0, 0, 0, 0]).astype(np.float64)
-        self._wrench = np.random.rand(6,)
         self._timeout_count = 0
         self._ipoc = 0
+        self._q = np.array([0, -90, 90, 0, 90, 0]).astype(np.float64)
+        self._qd = np.array([0, 0, 0, 0, 0, 0]).astype(np.float64)
+        self._wrench = np.random.rand(6,)
         self._digital_output_0 = 0
         self._timer = self.create_timer(self._cycle_time, self.timer_callback)
 
         try:
             self._s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             self.get_logger().info("Successfully created socket")
-            self._s.settimeout(0.004)
+            self._s.settimeout(self._cycle_time)
         except socket.error as e:
             self.get_logger().fatal(f"Could not create socket: {e}")
             sys.exit()
@@ -38,8 +38,8 @@ class RsiSimulator(Node):
         root = ET.Element('Rob', {'TYPE': 'KUKA'})
         ET.SubElement(root, 'AIPos', {'A1': str(self._q[0]), 'A2': str(self._q[1]), 'A3': str(self._q[2]),
                                       'A4': str(self._q[3]), 'A5': str(self._q[4]), 'A6': str(self._q[5])})
-        ET.SubElement(root, 'AIVel', {'A1': str(self._dq[0]), 'A2': str(self._dq[1]), 'A3': str(self._dq[2]),
-                                      'A4': str(self._dq[3]), 'A5': str(self._dq[4]), 'A6': str(self._dq[5])})
+        ET.SubElement(root, 'AIVel', {'A1': str(self._qd[0]), 'A2': str(self._qd[1]), 'A3': str(self._qd[2]),
+                                      'A4': str(self._qd[3]), 'A5': str(self._qd[4]), 'A6': str(self._qd[5])})
         ET.SubElement(root, 'FT', {'Fx': str(self._wrench[0]), 'Fy': str(self._wrench[1]), 'Fz': str(self._wrench[2]),
                                    'Tx': str(self._wrench[3]), 'Ty': str(self._wrench[4]), 'Tz': str(self._wrench[5])})
         ET.SubElement(root, 'DigOut', {"digital_output_0": str(self._digital_output_0)}),
@@ -70,8 +70,10 @@ class RsiSimulator(Node):
                 msg = self._create_rsi_xml_rob()
                 self._s.sendto(msg, (self._host, self._port))
             recv_msg, _ = self._s.recvfrom(1024)
-            self._dq = self._parse_rsi_xml_sen(recv_msg)
-            self._q += self._dq
+            dq = self._parse_rsi_xml_sen(recv_msg)
+            q_new = self._q + dq
+            self._qd = (q_new - self._q) / self._cycle_time
+            self._q = q_new
             self._wrench = np.random.rand(6,)
             self._timeout_count = 0
             time.sleep(self._cycle_time / 2)
