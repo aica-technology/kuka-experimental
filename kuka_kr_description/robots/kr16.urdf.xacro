@@ -3,7 +3,8 @@
   <xacro:arg name="prefix" default="kr16_"/>
   <xacro:arg name="rsi_ip" default="127.0.0.1"/>
   <xacro:arg name="rsi_port" default="49152"/>
-  <xacro:arg name="socket_timeout" default="30"/>
+  <xacro:arg name="connection_timeout" default="30"/>
+  <xacro:arg name="communication_timeout" default="1"/>
   <xacro:arg name="has_ft_sensor" default="false"/>
   <xacro:arg name="load_ros2_control" default="false"/>
   <xacro:arg name="connected_to" default=""/>
@@ -20,7 +21,8 @@
             prefix="$(arg prefix)"
             rsi_ip="$(arg rsi_ip)"
             rsi_port="$(arg rsi_port)"
-            socket_timeout="$(arg socket_timeout)"
+            connection_timeout="$(arg connection_timeout)"
+            communication_timeout="$(arg communication_timeout)"
             has_ft_sensor="$(arg has_ft_sensor)"
     />
   </xacro:if>
