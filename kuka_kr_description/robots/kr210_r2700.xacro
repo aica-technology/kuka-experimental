@@ -3,15 +3,19 @@
   <xacro:macro name="kr210_r2700" params="prefix:='kr210_' connected_to:='' xyz:='0 0 0' rpy:='0 0 0'">
     <!-- LINKS -->
     <!-- base link -->
+    <material name="black">
+      <color rgba="0.2 0.2 0.2 1"/>
+    </material>
+    <material name="orange">
+      <color rgba="0.945 0.359 0.098 1"/>
+    </material>
     <link name="${prefix}base_link">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
           <mesh filename="package://kuka_kr_description/meshes/kr210_r2700/visual/base_link.stl" />
         </geometry>
-        <material name="">
-          <color rgba="0.75294 0.75294 0.75294 1"/>
-        </material>
+        <material name="black"/>
       </visual>
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -32,9 +36,7 @@
         <geometry>
           <mesh filename="package://kuka_kr_description/meshes/kr210_r2700/visual/link_1.stl" />
         </geometry>
-        <material name="">
-          <color rgba="0.75294 0.75294 0.75294 1"/>
-        </material>
+        <material name="orange"/>
       </visual>
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -55,9 +57,7 @@
         <geometry>
           <mesh filename="package://kuka_kr_description/meshes/kr210_r2700/visual/link_2.stl"/>
         </geometry>
-        <material name="">
-          <color rgba="0.75294 0.75294 0.75294 1"/>
-        </material>
+        <material name="orange"/>
       </visual>
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -78,9 +78,7 @@
         <geometry>
           <mesh filename="package://kuka_kr_description/meshes/kr210_r2700/visual/link_3.stl" />
         </geometry>
-        <material name="">
-          <color rgba="0.75294 0.75294 0.75294 1"/>
-        </material>
+        <material name="orange"/>
       </visual>
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -101,9 +99,7 @@
         <geometry>
           <mesh filename="package://kuka_kr_description/meshes/kr210_r2700/visual/link_4.stl" />
         </geometry>
-        <material name="">
-          <color rgba="0.75294 0.75294 0.75294 1"/>
-        </material>
+        <material name="orange"/>
       </visual>
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -124,9 +120,7 @@
         <geometry>
           <mesh filename="package://kuka_kr_description/meshes/kr210_r2700/visual/link_5.stl" />
         </geometry>
-        <material name="">
-          <color rgba="0.75294 0.75294 0.75294 1"/>
-        </material>
+        <material name="orange"/>
       </visual>
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -147,9 +141,7 @@
         <geometry>
           <mesh filename="package://kuka_kr_description/meshes/kr210_r2700/visual/link_6.stl" />
         </geometry>
-        <material name="">
-          <color rgba="0.75294 0.75294 0.75294 1"/>
-        </material>
+        <material name="black"/>
       </visual>
       <collision>
         <origin xyz="0 0 0" rpy="0 0 -0.785398"/>
