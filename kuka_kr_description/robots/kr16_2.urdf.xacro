@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="kr16_2">
   <xacro:arg name="prefix" default="kr16_2_"/>
-  <xacro:arg name="rsi_ip" default="127.0.0.1"/>
+  <xacro:arg name="rsi_ip" default="0.0.0.0"/>
   <xacro:arg name="rsi_port" default="49152"/>
   <xacro:arg name="connection_timeout" default="30"/>
   <xacro:arg name="communication_timeout" default="1"/>
