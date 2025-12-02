@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="kr3_r540">
+  <xacro:arg name="prefix" default=""/>
+  <xacro:arg name="rsi_ip" default="0.0.0.0"/>
+  <xacro:arg name="rsi_port" default="49152"/>
+  <xacro:arg name="connection_timeout" default="30"/>
+  <xacro:arg name="communication_timeout" default="1"/>
+  <xacro:arg name="has_ft_sensor" default="false"/>
+  <xacro:arg name="load_ros2_control" default="false"/>
+  <xacro:arg name="connected_to" default=""/>
+  <xacro:arg name="xyz" default="0 0 0"/>
+  <xacro:arg name="rpy" default="0 0 0"/>
+
+  <xacro:include filename="$(find kuka_kr_description)/robots/kr3_r540.xacro"/>
+
+  <xacro:kr3_r540 prefix="$(arg prefix)" connected_to="$(arg connected_to)" xyz="$(arg xyz)" rpy="$(arg rpy)"/>
+  <xacro:if value="$(arg load_ros2_control)">
+    <xacro:include filename="$(find kuka_kr_description)/ros2_control/kr3_r540.ros2_control.xacro"/>
+    <xacro:kr3_r540_interface
+            name="RsiInterface"
+            prefix="$(arg prefix)"
+            rsi_ip="$(arg rsi_ip)"
+            rsi_port="$(arg rsi_port)"
+            connection_timeout="$(arg connection_timeout)"
+            communication_timeout="$(arg communication_timeout)"
+            has_ft_sensor="$(arg has_ft_sensor)"
+    />
+  </xacro:if>
+</robot>
